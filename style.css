@@ -3,3 +3,76 @@ h1 {
     justify-content: center;
 }
 
+main {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#calculator {
+    display: grid;
+    grid-template: 60px repeat(5, 50px)/ repeat(4, 50px);
+    width: 600px;
+    height: 700px;
+}
+
+#display  {
+    grid-area: 1/1/span 1/span 4;
+    border: 1px solid black;
+}
+
+#deleting {
+    grid-area: 2/1/span 1/span 4;
+}
+
+#clear {
+    grid-area: 2/1/span 1/span 2;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: gray;
+}
+
+#delete {
+    grid-area: 2/3/span 1/span 2;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: gray;
+}
+
+#numbers {
+    grid-area: 3/1/span 4/span 3;
+    display: grid;
+    grid-template: repeat(4, 50px)/ repeat(3,50px);
+}
+
+#numbers div {
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: lightgray;
+}
+
+#symbols {
+    grid-area: 3/4/span 4/span 1;
+    display: grid;
+    grid-template: repeat(4, 50px)/ 50px;
+}
+
+#symbols div {
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: orange;
+}
+
+div,
+article,
+main {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
