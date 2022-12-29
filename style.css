@@ -17,7 +17,7 @@ main {
 
 #display  {
     grid-area: 1/1/span 1/span 4;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 #deleting {
