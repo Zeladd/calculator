@@ -1,3 +1,9 @@
+let nr1 = 0;
+let nr2 = 0;
+let liveDisplay = "";
+const display = document.querySelector("#display");
+const numbers = document.querySelectorAll(".on-display");
+
 const add = (nr1, nr2) => {
     return Number(nr1) + Number(nr2);
 }
@@ -27,3 +33,10 @@ const del = (nr) => {
     }
     return result;
 }
+
+numbers.forEach(number => {
+    number.addEventListener('click', () => {
+        display.textContent = liveDisplay + number.textContent;
+        liveDisplay += number.textContent;
+    });
+});
