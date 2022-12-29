@@ -78,3 +78,6 @@ span {
     align-items: center;
 }
 
+main {
+    user-select: none;
+}
