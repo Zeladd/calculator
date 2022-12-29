@@ -1,7 +1,8 @@
-let nr1 = 0;
-let nr2 = 0;
-let liveDisplay = "";
-const display = document.querySelector("#display");
+let nr1 = "";
+let nr2 = "";
+let isSymbol = false;
+const nr1Display = document.querySelector("#nr1");
+const nr2Display = document.querySelector("#nr2");
 const numbers = document.querySelectorAll(".on-display");
 const symbols = document.querySelectorAll("#symbols div");
 
@@ -35,28 +36,74 @@ const del = (nr) => {
     return result;
 }
 
+const equal = (nr1, nr2) => {
+    if (nr1[nr1.length - 1] === "+") {
+        return add(del(nr1), nr2);
+    }
+    else if (nr1[nr1.length - 1] === "-") {
+        return substract(del(nr1), nr2);
+    }
+    else if (nr1[nr1.length - 1] === "\u00D7") {
+        return multiply(del(nr1), nr2);
+    }
+    else if (nr1[nr1.length - 1] === "\u00F7") {
+        return division(del(nr1), nr2);
+    }
+    else {
+        return nr1;
+    }
+}
+
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        display.textContent = liveDisplay + number.textContent;
-        liveDisplay += number.textContent;
+        if(nr2 === "" && isSymbol == false) {
+            nr1 += number.textContent;
+            nr1Display.textContent = nr1;
+        }
+        else {
+            nr2 += number.textContent;
+            nr2Display.textContent = nr2;
+        }
     });
 });
 
-symbols.forEach(symbols => {
-    symbols.addEventListener('click', () => {
-        if (liveDisplay.length >= 1) {
-            display.textContent = liveDisplay + symbols.textContent;
-            liveDisplay += symbols.textContent;
+symbols.forEach(symbol => {
+    symbol.addEventListener('click', () => {
+        if (nr1.length >= 1 && isSymbol == false) {
+            nr1 += symbol.textContent;
+            nr1Display.textContent += symbol.textContent;
+            isSymbol = true;
         }
     });
 });
 
 document.querySelector("#clear").addEventListener('click', () => {
-    liveDisplay = clear();
-    display.textContent = clear();
+    nr1 = clear();
+    nr2 = clear();
+    nr1Display.textContent = clear();
+    nr2Display.textContent = clear();
+    isSymbol = false;
 });
 
 document.querySelector("#delete").addEventListener('click', () => {
-    liveDisplay = del(liveDisplay);
-    display.textContent = liveDisplay;
+    if (nr2 === "") {
+        isSymbol = false;
+        nr1 = del(nr1);
+        nr1Display.textContent = nr1;
+    }
+    else {
+        nr2 = del(nr2);
+        nr2Display.textContent = nr2;
+    }
+});
+
+document.querySelector("#equal").addEventListener('click', () => {
+    if (isSymbol === true && nr2.length >= 1) {
+        nr1 = equal(nr1, nr2);
+        nr1 = nr1.toString();
+        nr1Display.textContent = nr1;
+        nr2 = clear();
+        nr2Display.textContent = clear();
+        isSymbol = false;
+    }
 });
